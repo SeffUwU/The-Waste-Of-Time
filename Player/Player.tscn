@@ -1,19 +1,33 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player_script.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://sprites/attacksprite.png" type="Texture" id=3]
+[ext_resource path="res://sprites/attack_frame3.png" type="Texture" id=4]
+[ext_resource path="res://sprites/attack_frame2.png" type="Texture" id=5]
+[ext_resource path="res://sprites/attack_frame1.png" type="Texture" id=6]
+[ext_resource path="res://sprites/attack_frame0.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9.64275, 9.74443 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "attack",
+"speed": 20.0
+} ]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.3, 0.3 )
+scale = Vector2( 0.40625, 0.40625 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.184021, -0.184029 )
 shape = SubResource( 1 )
 
@@ -21,4 +35,27 @@ shape = SubResource( 1 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
-smoothing_speed = 10.0
+smoothing_speed = 30.0
+
+[node name="damageZone" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="damageZone"]
+position = Vector2( 1, 0 )
+rotation = 1.5708
+scale = Vector2( 2.48873, 1.46457 )
+polygon = PoolVector2Array( 0, 0.759713, 12.0544, -24.5806, 10.8489, -28.6774, 8.83986, -30.7258, 6.8308, -32.0914, 4.01812, -33.457, -8.60624e-07, -33.457, -4.01812, -33.457, -6.8308, -32.0914, -8.83986, -30.7258, -10.8489, -28.6774, -12.0544, -24.5806 )
+
+[node name="attackZoneSprite" type="Sprite" parent="damageZone"]
+position = Vector2( 34, 0 )
+rotation = 1.5708
+texture = ExtResource( 3 )
+
+[node name="attackAnim" type="AnimatedSprite" parent="damageZone"]
+visible = false
+position = Vector2( 28.8713, 2.12929e-07 )
+rotation = 1.5708
+scale = Vector2( 1, 1.30445 )
+frames = SubResource( 2 )
+animation = "attack"
+[connection signal="body_entered" from="damageZone" to="." method="_on_damageZone_body_entered"]
+[connection signal="animation_finished" from="damageZone/attackAnim" to="." method="_on_attackAnim_animation_finished"]
