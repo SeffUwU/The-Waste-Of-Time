@@ -20,8 +20,6 @@ func _ready():
 	var window_size = OS.get_window_size()
 	var centered_pos = (screen_size - window_size) / 2
 	OS.set_window_position(centered_pos)
-	# Note: not tested on mobile platforms,
-	# should do nothing in that case because it's fullscreen anyway
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
