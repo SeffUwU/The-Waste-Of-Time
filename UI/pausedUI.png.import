@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/pausedUI.png-51d1cb097ec8a8e8b7c4e40340528480.image"
+
+[deps]
+
+source_file="res://UI/pausedUI.png"
+dest_files=[ "res://.import/pausedUI.png-51d1cb097ec8a8e8b7c4e40340528480.image" ]
+
+[params]
+

@@ -16,7 +16,15 @@ _global_script_class_icons={
 [application]
 
 config/name="The Waste Of Time"
+run/main_scene="res://levels/test_env.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/resizable=false
+window/size/fullscreen=true
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [input]
 
@@ -52,4 +60,6 @@ attack_key={
 
 [rendering]
 
+quality/2d/gles2_use_nvidia_rect_flicker_workaround=true
+environment/default_clear_color=Color( 0.494118, 0.321569, 0.321569, 1 )
 environment/default_environment="res://default_env.tres"
